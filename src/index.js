@@ -69,15 +69,30 @@ const Header = () => {
   )
 }
 
-const Menu = () => {
+const Menu = () => {  // parent of pizza component
   return (
     <main className="menu">
       <h2>Our menu</h2>
-      <Pizza />
-      <Pizza />
-      <Pizza />
+      <ul className="pizzas">
+        {pizzaData.map(pizza => (
+          <Pizza pizzaObj={pizza} key={pizza.name} />
+        ))}
+      </ul> {/* name, ingredients, photoName are props */}
     </main>
   )
+}
+
+const Pizza = (props) => {
+  return (
+    <li className="pizza">
+      <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name} />
+      <div>
+        <h3>{props.pizzaObj.name}</h3>
+        <p>{props.pizzaObj.ingredients}</p>
+        <span>{props.pizzaObj.price}</span>
+      </div>
+    </li>
+  );
 }
 
 const Footer = () => {
@@ -93,16 +108,6 @@ const Footer = () => {
     <footer className="footer">
       {new Date().toLocaleTimeString()}.We're currently open!
     </footer>
-  );
-}
-
-const Pizza = () => {
-  return (
-    <div>
-      <img src="pizzas/spinaci.jpg" alt="Pizza spinaci" />
-      <h3>Pizza Spinaci</h3>
-      <p>Tomato, mozarella, spinach, and ricotta cheese</p>
-    </div>
   );
 }
 

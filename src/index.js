@@ -99,12 +99,12 @@ const Menu = () => {  // parent of pizza component
 
 const Pizza = ({ pizzaObj }) => { // Destructured pizzaObj prop and got rid
   return (                         //  of the props argument
-    <li className="pizza">
+    <li className={`pizza ${pizzaObj.soldOut ? "sold-out" : ""}`}>
       <img src={pizzaObj.photoName} alt={pizzaObj.name} />
       <div>
         <h3>{pizzaObj.name}</h3>
         <p>{pizzaObj.ingredients}</p>
-        <span>{pizzaObj.price}</span>
+        <span>{pizzaObj.soldOut ? "SOLD OUT" : pizzaObj.price}</span>
       </div>
     </li>
   );
@@ -122,7 +122,7 @@ const Footer = () => {
   return (
     <footer className="footer">
       {isOpen ? (
-        < Order closeHours={closeHour} /> // This is a prop
+        < Order closeHours={closeHour} openHours={openHour} /> // This is a prop
       ) : <p>We're happy to welcome you between {openHour}:00 and {closeHour}:00</p>}
     </footer >
   );
@@ -131,7 +131,7 @@ const Footer = () => {
 const Order = (props) => {
   return (
     <div className="order">
-      <p>We're open until {props.closeHours}:00. Visit us or order online.</p>
+      <p>We're open from {props.openHours}:00 until {props.closeHours}:00. Visit us or order online.</p>
       <button className="btn">Order</button>
     </div>
   )

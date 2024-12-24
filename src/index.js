@@ -79,24 +79,32 @@ const Menu = () => {  // parent of pizza component
       <h2>Our menu</h2>
 
       {numPizzas > 0 ? (
-        <ul className="pizzas">
-          {pizzaData.map(pizza => (
-            <Pizza pizzaObj={pizza} key={pizza.name} />
-          ))}
-        </ul>
-      ) : null}
+        <> {/* this is a react fragment that allows us to return multiple elements */}
+          <p>
+            Authentic Italian cuisine. 6 creative dishes to choose from. All
+            from our stone oven, all organic, all delicious, all for you.
+          </p>
+
+          <ul className="pizzas">
+            {pizzaData.map(pizza => (
+              <Pizza pizzaObj={pizza} key={pizza.name} />
+            ))}
+          </ul>
+        </>
+
+      ) : <p>We're still working on our menu. Please come back later. :)</p>}
     </main>
   )
 }
 
-const Pizza = (props) => {
-  return (
+const Pizza = ({ pizzaObj }) => { // Destructured pizzaObj prop and got rid
+  return (                         //  of the props argument
     <li className="pizza">
-      <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name} />
+      <img src={pizzaObj.photoName} alt={pizzaObj.name} />
       <div>
-        <h3>{props.pizzaObj.name}</h3>
-        <p>{props.pizzaObj.ingredients}</p>
-        <span>{props.pizzaObj.price}</span>
+        <h3>{pizzaObj.name}</h3>
+        <p>{pizzaObj.ingredients}</p>
+        <span>{pizzaObj.price}</span>
       </div>
     </li>
   );

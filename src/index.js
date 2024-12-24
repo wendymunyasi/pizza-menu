@@ -78,13 +78,13 @@ const Menu = () => {  // parent of pizza component
     <main className="menu">
       <h2>Our menu</h2>
 
-      {numPizzas > 0 && (
+      {numPizzas > 0 ? (
         <ul className="pizzas">
           {pizzaData.map(pizza => (
             <Pizza pizzaObj={pizza} key={pizza.name} />
           ))}
         </ul>
-      )}
+      ) : null}
     </main>
   )
 }
@@ -113,14 +113,20 @@ const Footer = () => {
 
   return (
     <footer className="footer">
-      {isOpen && (
-        <div className="order">
-          <p>We're open until {closeHour}:00. Visit us or order online.</p>
-          <button className="btn">Order</button>
-        </div>
-      )}
-    </footer>
+      {isOpen ? (
+        < Order closeHours={closeHour} /> // This is a prop
+      ) : <p>We're happy to welcome you between {openHour}:00 and {closeHour}:00</p>}
+    </footer >
   );
+}
+
+const Order = (props) => {
+  return (
+    <div className="order">
+      <p>We're open until {props.closeHours}:00. Visit us or order online.</p>
+      <button className="btn">Order</button>
+    </div>
+  )
 }
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
